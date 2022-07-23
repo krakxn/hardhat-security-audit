@@ -1,5 +1,7 @@
 # Security Audit - Hardhat:
 
+## References from Patrick Collins - Thank you!
+
 This is to help users understand basic security and some fundamentals of auditing.
 
 This repo has a few contracts with big flaws, see if you can find them, and see if the tools help you find them! Good luck!
