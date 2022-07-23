@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// Check out Ethernaut: https://ethernaut.openzeppelin.com/
-// For even more solidity security focused challenges
+/// Check out Ethernaut: https://ethernaut.openzeppelin.com/
+/// For even more Solidity security-focused challenges
 
-// Using a liquidity pool makes a contract vulnerable to flash loan attacks
-// One should use a decentralized oracle network like Chainlink Data Feeds:
-// https://docs.chain.link/docs/get-the-latest-price/
+/// Using a liquidity pool makes a contract vulnerable to flash loan attacks
+/// To avoid that, one should use a decentralized oracle network like Chainlink (specifically Data Feeds):
+/// https://docs.chain.link/docs/get-the-latest-price/
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
@@ -31,6 +31,7 @@ contract LiquidityPoolAsOracle {
             (from == s_token1 && to == s_token2) || (from == s_token2 && to == s_token1),
             "Invalid tokens"
         );
+        
         require(IERC20(from).balanceOf(msg.sender) >= amount, "Not enough to swap");
         uint256 swap_amount = getSwapPrice(from, to, amount);
         bool txFromSuccess = IERC20(from).transferFrom(msg.sender, address(this), amount);
@@ -53,5 +54,3 @@ contract LiquidityPoolAsOracle {
             IERC20(from).balanceOf(address(this)));
     }
 }
-
-// How could you make a contract that exploits this Dex?
